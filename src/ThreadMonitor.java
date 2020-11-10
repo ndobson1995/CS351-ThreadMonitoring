@@ -4,6 +4,8 @@ import java.util.Scanner;
 //TODO: fix refresh mechanism(Timer or wait()method ?)
 
 class ThreadMonitor {
+
+
     private static void getThreadData(ThreadGroup threadGroup) {
         int noThreads = threadGroup.activeCount();
         int noGroups = threadGroup.activeGroupCount();
@@ -16,32 +18,36 @@ class ThreadMonitor {
         printThreadInfo(threadGroup,threadList, groupsList);
     }
 
+
     private static void printThreadInfo(ThreadGroup threadGroup, Thread[] threads, ThreadGroup[] groups) {
         System.out.println("\n" + "Thread Group: " + threadGroup.getName( ) + " Max Priority: " + threadGroup.getMaxPriority( ));
 
         for (Thread listThread: threads){
-            System.out.println("Thread: " + listThread.getName() + " Priority: " + listThread.getPriority() + " State: " + listThread.getState() + " Thread ID: " + listThread.getId());
+            System.out.println("Thread: " + listThread.getName() + "\n\t- Priority: " + listThread.getPriority() + "\n\t- State: " + listThread.getState() + "\n\t- Thread ID: " + listThread.getId());
         }
         for(ThreadGroup groupThreads : groups){
             getThreadData(groupThreads);
         }
     }
 
-    static void getRootThreadGroup() {
-            ThreadGroup currentThread = Thread.currentThread().getThreadGroup().getParent();
-            ThreadGroup rootThread = null;
 
-            if (currentThread.getParent() == null){
-                rootThread = currentThread;
-            } else {
-                System.out.println("Not main thread: " + currentThread.getName());
-            }
-        getThreadData(rootThread);
+    public static void getRootThreadGroup() {
+        ThreadGroup currentThread = Thread.currentThread().getThreadGroup().getParent();
+        ThreadGroup rootThread = null;
+
+        if (currentThread.getParent() == null){
+            rootThread = currentThread;
+        } else {
+            System.out.println("Not main thread: " + currentThread.getName());
+        }
+        if (rootThread != null) {
+            getThreadData(rootThread);
+        }
 
     }
 
     //TODO:refactor this, take out lines 45-49 they can be there own method that can all be used in method (getThreadData^)
-    static void searchForThread(){
+    public static void searchForThread(){
         Scanner scan = new Scanner(System.in);
         System.out.println("What Thread Name would you like to search for?");
         String option = scan.next();
@@ -61,7 +67,7 @@ class ThreadMonitor {
 
 
     //TODO:Fix this, its weird and doesnt work right
-    static void deleteThread() {
+    public static void deleteThread() {
         Scanner scan = new Scanner(System.in);
         System.out.println("What Thread Name would you like to terminate");
         String option = scan.next();

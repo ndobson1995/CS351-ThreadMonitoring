@@ -1,8 +1,28 @@
 import java.util.Scanner;
 
-public class Main {
+public class Main implements Runnable {
 
+
+    @Override
+    public void run() {
+        while(true) {
+            ThreadMonitor.getRootThreadGroup();
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    
     public static void main(String[] args) {
+        Main main = new Main();
+
+        Thread thread1 = new Thread(main);
+        thread1.start();
+
+
         Scanner scan = new Scanner(System.in);
         int option;
 
