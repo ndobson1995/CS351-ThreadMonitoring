@@ -4,8 +4,6 @@ import java.util.Scanner;
 //TODO: fix refresh mechanism(Timer or wait()method ?)
 
 class ThreadMonitor {
-
-
     private static void getThreadData(ThreadGroup threadGroup) {
         int noThreads = threadGroup.activeCount();
         int noGroups = threadGroup.activeGroupCount();
@@ -43,7 +41,6 @@ class ThreadMonitor {
         if (rootThread != null) {
             getThreadData(rootThread);
         }
-
     }
 
     //TODO:refactor this, take out lines 45-49 they can be there own method that can all be used in method (getThreadData^)
@@ -62,7 +59,6 @@ class ThreadMonitor {
                 System.out.println("Thread: " + listThread.getName() + " Priority: " + listThread.getPriority() + " State: " + listThread.getState() + " Thread ID: " + listThread.getId());
             }
         }
-
     }
 
 
